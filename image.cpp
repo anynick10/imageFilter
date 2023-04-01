@@ -57,3 +57,25 @@ int Image::filterGrey(){
   }
   return 0;
 }
+
+Image operator+(Image img, int a){
+  for(int i=0; i<img.ih.biHeight*3; i++){
+    for(int j=0; j<img.ih.biWidth; j++){
+      img.file[i*img.ih.biWidth + j] = (255-img.file[i*img.ih.biWidth + j]>a) ? img.file[i*img.ih.biWidth + j]+a : 255;
+    }
+  }
+  return img;
+}
+
+Image operator+(Image img, RGBQUAD rgb){
+  for(int i=0; i<img.ih.biHeight; i++){
+    for(int j=0; j<img.ih.biWidth*3; j+=3){
+      img.file[i*img.ih.biWidth*3 + j] = (255-img.file[i*img.ih.biWidth*3 + j]>rgb.rgbBlue) ? img.file[i*img.ih.biWidth*3 + j]+rgb.rgbBlue : 255;
+
+      img.file[i*img.ih.biWidth*3 + j + 1] = (255-img.file[i*img.ih.biWidth*3 + j+1]>rgb.rgbGreen) ? img.file[i*img.ih.biWidth*3 + j+1]+rgb.rgbGreen : 255;
+
+      img.file[i*img.ih.biWidth*3 + j + 2] = (255-img.file[i*img.ih.biWidth*3 + j+2]>rgb.rgbRed) ? img.file[i*img.ih.biWidth*3 + j+2]+rgb.rgbRed : 255;
+    }
+  }
+  return img;
+}

@@ -20,6 +20,8 @@ class Image{
   int printImage();
   int filterGrey();
   int filterGreySmall();
+  friend Image operator+(Image img, int a);
+  friend Image operator+(Image img, RGBQUAD rgb);
 };
 
 int power(int base, int p);
