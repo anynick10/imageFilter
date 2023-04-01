@@ -51,8 +51,8 @@ int Image::printImage(){
 
 int Image::filterGrey(){
   for(int i=0; i<ih.biHeight; i++){
-    for(int j=0; j<ih.biWidth/3; j++){
-      file[i*ih.biWidth + 3*j] = file[i*ih.biWidth + 3*j + 1] = file[i*ih.biWidth + 3*j + 2] = file[i*ih.biWidth + 3*j]*0.0722 + file[i*ih.biWidth + 3*j + 1]*0.7152  + file[i*ih.biWidth + 3*j + 2]*0.2126; // YCrCb방식
+    for(int j=0; j<ih.biWidth*3; j+=3){
+      file[i*ih.biWidth*3 + j] = file[i*ih.biWidth*3 + j + 1] = file[i*ih.biWidth*3 + j + 2] = file[i*ih.biWidth*3 + j]*0.0722 + file[i*ih.biWidth*3 + j + 1]*0.7152  + file[i*ih.biWidth*3 + j + 2]*0.2126; // YCrCb방식
     }
   }
   return 0;
