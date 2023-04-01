@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
 
 
   if(lena.isRunning()){
-    std::cout << "Filter type" << std::endl << "1: grey" << std::endl << "2: int multipul" << std::endl << "3: rgb multipul" << std::endl << "(1~1):";
+    std::cout << "Filter type" << std::endl << "1: grey" << std::endl << "2: int multipul" << std::endl << "3: rgb multipul" << std::endl << "4: sepia" << std::endl << "(1~4):";
     std::cin >> type;
     if(type==1){
       if(!lena.filterGrey()){
@@ -45,6 +45,15 @@ int main(int argc, char* argv[]){
       lena = lena+rgb;
       std::cout << "Proceeding" << std::endl;
       lena.printImage();
+    }else if(type == 4){
+      if(!lena.sepia()){
+        std::cout << "Proceeding" << std::endl;
+        lena.printImage();
+      }
+      else{
+        std::cout << "Failed. It is too small.";
+        return 0;
+      }
     }else{
       std::cout << "Undefined";
       return 0;

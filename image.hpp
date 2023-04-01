@@ -22,6 +22,7 @@ class Image{
   int filterGreySmall();
   friend Image operator+(Image img, int a);
   friend Image operator+(Image img, RGBQUAD rgb);
+  int sepia();
 };
 
 int power(int base, int p);

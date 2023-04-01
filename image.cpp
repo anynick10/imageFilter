@@ -79,3 +79,22 @@ Image operator+(Image img, RGBQUAD rgb){
   }
   return img;
 }
+
+int Image::sepia(){
+  if(ih.biBitCount<=8){
+    return 1;
+  }
+  for(int i=0; i<ih.biHeight; i++){
+    for(int j=0; j<ih.biWidth*3; j+=3){
+      int r, g, b;
+      r=file[i*ih.biWidth*3 + j + 2];
+      g=file[i*ih.biWidth*3 + j + 1];
+      b=file[i*ih.biWidth*3 + j];
+
+      file[i*ih.biWidth*3 + j+2]=(r*0.3588 + g*0.7044 + b*0.1368)<=255 ? r*0.3588 + g*0.7044 + b*0.1368 : 255;
+      file[i*ih.biWidth*3 + j+1]=(r*0.2990 + g*0.5870 + b*0.1140)<=255 ? r*0.2990 + g*0.5870 + b*0.1140:255;
+      file[i*ih.biWidth*3 + j]=(r*0.2392 + g*0.4696 + b*0.0912)<=255 ? r*0.2392 + g*0.4696 + b*0.0912:255;
+    }
+  }
+  return 0;
+}
