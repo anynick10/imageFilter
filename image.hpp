@@ -12,14 +12,14 @@ class Image{
   RGBQUAD* rgb;
   BYTE* file=NULL;
   int size;
-  int rwsize;
+  int rgbquad;
 
   public:
   Image(char * filename);
   int isRunning();
   int printImage();
   int filterGrey();
-  //friend Image operator+(Image i, RGBQUAD rgb);
+  int filterGreySmall();
 };
 
 int power(int base, int p);
