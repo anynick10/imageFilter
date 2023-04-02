@@ -1,5 +1,4 @@
 #include "image.hpp"
-#include <iostream>
 
 int main(int argc, char* argv[]){
   int type;
@@ -71,5 +70,8 @@ int main(int argc, char* argv[]){
   }else{
     std::cout << "Error";
   }
+
+  std::cout<<std::endl<<"print to text.";
+  lena.printMatrix();
   return 0;
 }

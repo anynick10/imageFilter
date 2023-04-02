@@ -105,10 +105,30 @@ int Image::threshold(){
   }
   this->filterGrey();
 
-  for(int i=0; i<ih.biHeight*3; i++){
+  for(int i=0; i<ih.biHeight*3; i++){ //In fact, *3 should be at w, but it work smoothly.
     for(int j=0; j<ih.biWidth; j++){
       file[i*ih.biWidth + j] = (file[i*ih.biWidth + j]>128) ? 255 : 0;
     }
   }
+  return 0;
+}
+
+int Image::printMatrix(){
+  FILE * outFile = fopen("output.txt", "wt");
+  for(int i=0; i<ih.biHeight; i++){
+    for(int j=0; j<ih.biWidth*3; j+=3){
+      fputs("{", outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth + j+2])).c_str(), outFile);
+      fputs(" ", outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth + j+1])).c_str(), outFile);
+      fputs(" ", outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth + j])).c_str(), outFile);
+      fputs("}", outFile);
+    }
+    fputs("\n", outFile);
+  }
+
+  fclose(outFile);
+
   return 0;
 }

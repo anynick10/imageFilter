@@ -1,6 +1,9 @@
 #include <windows.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <iostream>
+#include <sstream>
+
 
 #define WIDTHBYTES(bits) (((bits) +31)/32*4)
 
@@ -30,6 +33,7 @@ class Image{
   friend Image operator+(Image img, Rgb rgb);
   int sepia();
   int threshold();
+  int printMatrix();
 };
 
 int power(int base, int p);
