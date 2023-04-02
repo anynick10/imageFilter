@@ -12,7 +12,7 @@ int main(int argc, char* argv[]){
 
 
   if(lena.isRunning()){
-    std::cout << "Filter type" << std::endl << "1: grey" << std::endl << "2: int multipul" << std::endl << "3: rgb multipul" << std::endl << "4: sepia" << std::endl << "(1~4):";
+    std::cout << "Filter type" << std::endl << "1: grey" << std::endl << "2: int multipul" << std::endl << "3: rgb multipul" << std::endl << "4: sepia" << std::endl << "5: threshold" << std::endl << "(1~5):";
     std::cin >> type;
     if(type==1){
       if(!lena.filterGrey()){
@@ -31,22 +31,31 @@ int main(int argc, char* argv[]){
       std::cout << "Proceeding" << std::endl;
       lena.printImage();
     }else if(type == 3){
-      unsigned int r,g,b;
-      std::cout << "how much(uint)R:";
+      int r,g,b;
+      std::cout << "how much(int)R:";
       std::cin >> r;
 
-      std::cout << "how much(uint)G:";
+      std::cout << "how much(int)G:";
       std::cin >> g;
 
-      std::cout << "how much(uint)B:";
+      std::cout << "how much(int)B:";
       std::cin >> b;
-      RGBQUAD rgb = {(BYTE)r,(BYTE)g,(BYTE)b,0};
+      Rgb rgb = {b,g,r};
 
       lena = lena+rgb;
       std::cout << "Proceeding" << std::endl;
       lena.printImage();
     }else if(type == 4){
       if(!lena.sepia()){
+        std::cout << "Proceeding" << std::endl;
+        lena.printImage();
+      }
+      else{
+        std::cout << "Failed. It is too small.";
+        return 0;
+      }
+    }else if(type==5){
+      if(!lena.threshold()){
         std::cout << "Proceeding" << std::endl;
         lena.printImage();
       }

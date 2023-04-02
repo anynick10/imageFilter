@@ -61,20 +61,20 @@ int Image::filterGrey(){
 Image operator+(Image img, int a){
   for(int i=0; i<img.ih.biHeight*3; i++){
     for(int j=0; j<img.ih.biWidth; j++){
-      img.file[i*img.ih.biWidth + j] = (255-img.file[i*img.ih.biWidth + j]>a) ? img.file[i*img.ih.biWidth + j]+a : 255;
+      img.file[i*img.ih.biWidth + j] = (img.file[i*img.ih.biWidth + j] > -a) ?( (255-img.file[i*img.ih.biWidth + j]>a) ? img.file[i*img.ih.biWidth + j]+a : 255) : (0);
     }
   }
   return img;
 }
 
-Image operator+(Image img, RGBQUAD rgb){
+Image operator+(Image img, Rgb rgb){
   for(int i=0; i<img.ih.biHeight; i++){
     for(int j=0; j<img.ih.biWidth*3; j+=3){
-      img.file[i*img.ih.biWidth*3 + j] = (255-img.file[i*img.ih.biWidth*3 + j]>rgb.rgbBlue) ? img.file[i*img.ih.biWidth*3 + j]+rgb.rgbBlue : 255;
+      img.file[i*img.ih.biWidth*3 + j] = ((img.file[i*img.ih.biWidth*3 + j]) > -rgb.rgbBlue) ? ((255-img.file[i*img.ih.biWidth*3 + j]>rgb.rgbBlue) ? img.file[i*img.ih.biWidth*3 + j]+rgb.rgbBlue : 255) : 0;
 
-      img.file[i*img.ih.biWidth*3 + j + 1] = (255-img.file[i*img.ih.biWidth*3 + j+1]>rgb.rgbGreen) ? img.file[i*img.ih.biWidth*3 + j+1]+rgb.rgbGreen : 255;
+      img.file[i*img.ih.biWidth*3 + j + 1] = ((img.file[i*img.ih.biWidth*3 + j+1]) > -rgb.rgbGreen) ? ((255-img.file[i*img.ih.biWidth*3 + j+1]>rgb.rgbGreen) ? img.file[i*img.ih.biWidth*3 + j+1]+rgb.rgbGreen : 255) : 0;
 
-      img.file[i*img.ih.biWidth*3 + j + 2] = (255-img.file[i*img.ih.biWidth*3 + j+2]>rgb.rgbRed) ? img.file[i*img.ih.biWidth*3 + j+2]+rgb.rgbRed : 255;
+      img.file[i*img.ih.biWidth*3 + j + 2] = ((img.file[i*img.ih.biWidth*3 + j+2]) > -rgb.rgbRed) ? ((255-img.file[i*img.ih.biWidth*3 + j+2]>rgb.rgbRed) ? img.file[i*img.ih.biWidth*3 + j+2]+rgb.rgbRed : 255) : 0;
     }
   }
   return img;
@@ -94,6 +94,20 @@ int Image::sepia(){
       file[i*ih.biWidth*3 + j+2]=(r*0.3588 + g*0.7044 + b*0.1368)<=255 ? r*0.3588 + g*0.7044 + b*0.1368 : 255;
       file[i*ih.biWidth*3 + j+1]=(r*0.2990 + g*0.5870 + b*0.1140)<=255 ? r*0.2990 + g*0.5870 + b*0.1140:255;
       file[i*ih.biWidth*3 + j]=(r*0.2392 + g*0.4696 + b*0.0912)<=255 ? r*0.2392 + g*0.4696 + b*0.0912:255;
+    }
+  }
+  return 0;
+}
+
+int Image::threshold(){
+  if(ih.biBitCount<=8){
+    return 1;
+  }
+  this->filterGrey();
+
+  for(int i=0; i<ih.biHeight*3; i++){
+    for(int j=0; j<ih.biWidth; j++){
+      file[i*ih.biWidth + j] = (file[i*ih.biWidth + j]>128) ? 255 : 0;
     }
   }
   return 0;

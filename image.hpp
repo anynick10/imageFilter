@@ -4,6 +4,12 @@
 
 #define WIDTHBYTES(bits) (((bits) +31)/32*4)
 
+typedef struct tagRGB{
+  int rgbBlue;
+  int rgbGreen;
+  int rgbRed;
+}Rgb;
+
 class Image{
   private:
   BITMAPFILEHEADER fh;
@@ -21,8 +27,9 @@ class Image{
   int filterGrey();
   int filterGreySmall();
   friend Image operator+(Image img, int a);
-  friend Image operator+(Image img, RGBQUAD rgb);
+  friend Image operator+(Image img, Rgb rgb);
   int sepia();
+  int threshold();
 };
 
 int power(int base, int p);
