@@ -118,11 +118,11 @@ int Image::printMatrix(){
   for(int i=0; i<ih.biHeight; i++){
     for(int j=0; j<ih.biWidth*3; j+=3){
       fputs("{", outFile);
-      fputs(std::to_string((u_int)(file[i*ih.biWidth + j+2])).c_str(), outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth*3 + j+2])).c_str(), outFile);
       fputs(" ", outFile);
-      fputs(std::to_string((u_int)(file[i*ih.biWidth + j+1])).c_str(), outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth*3 + j+1])).c_str(), outFile);
       fputs(" ", outFile);
-      fputs(std::to_string((u_int)(file[i*ih.biWidth + j])).c_str(), outFile);
+      fputs(std::to_string((u_int)(file[i*ih.biWidth*3 + j])).c_str(), outFile);
       fputs("}", outFile);
     }
     fputs("\n", outFile);
