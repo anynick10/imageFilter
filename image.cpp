@@ -132,3 +132,33 @@ int Image::printMatrix(){
 
   return 0;
 }
+
+/*
+int Image::cutImg(int start_h, int start_w, int end_h, int end_w){
+  if(start_h>=end_h || start_w >=end_w || start_h<0 || start_w<0 || end_h > ih.biHeight || end_w > ih.biWidth){
+    return 1;
+  }
+
+  BYTE * newfile = (BYTE*)malloc(sizeof(BYTE)*(end_h-start_h) * (end_w-start_w)*3);
+  for(int i=0; i<end_h-start_h; i++){
+    for(int j=0; j<(end_w-start_w)*3; j++){
+      newfile[i*(end_w-start_w)*3 + j]=file[(i+start_h)*ih.biWidth*3  + 3*start_w + j];
+    }
+  }
+  ih.biHeight = (end_h-start_h);
+  ih.biWidth = (end_w-start_w);
+  size=(end_h-start_h) * (end_w-start_w)*3;
+  printf("%d %d", ih.biHeight, ih.biWidth);
+  free(file);
+  file = newfile;
+  return 0;
+}*/ // I should have to learn more about vidio.
+/*
+Image operator+(Image img1, Image img2){
+  for(int i=0; i<img1.ih.biHeight*3; i++){
+    for(int j=0; j<img1.ih.biWidth; j++){
+      img1.file[i*img1.ih.biWidth + j] = ( (255-img1.file[i*img1.ih.biWidth + j]>img2.file[i*img1.ih.biWidth + j]) ? img1.file[i*img1.ih.biWidth + j]+img2.file[i*img1.ih.biWidth + j] : 255);
+    }
+  }
+  return img1;
+}*/
